@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:seguridad_evaluacion/src/utils/colors.dart';
 import 'package:seguridad_evaluacion/src/utils/dimensions.dart';
 
+enum gas { yes, no }
+
+enum electricity { yes, no }
+
 class FormThree extends StatefulWidget {
   const FormThree({Key? key}) : super(key: key);
 
@@ -46,8 +50,36 @@ class _FormThreeState extends State<FormThree> {
               const SizedBox(
                 height: 8,
               ),
-              TextFormField(
-
+              TextField(),
+              const SizedBox(
+                height: 16,
+              ),
+              const Text(
+                " 7. Indique techos o artefactos de iluminación",
+                style: TextStyle(
+                  fontSize: extraBigFont,
+                  color: Color(primaryColor),
+                ),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              TextField(),
+              const SizedBox(
+                height: 8,
+              ),
+              const Text(
+                " 8. Indique cuantas escaleras y salidas",
+                style: TextStyle(
+                  fontSize: extraBigFont,
+                  color: Color(primaryColor),
+                ),
+              ),
+              const SizedBox(
+                height: 8,
+              ),
+              TextField(
+                keyboardType: TextInputType.number,
               ),
               const SizedBox(
                 height: 8,
