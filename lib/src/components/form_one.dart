@@ -23,12 +23,22 @@ class _FormOneState extends State<FormOne> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const Text(
-                " 1. Indique la edificación que desea registrar",
-                style: TextStyle(
-                  fontSize: extraBigFont,
-                  color: Color(primaryColor),
-                ),
+              Row(
+                children: [
+                  Spacer(),
+                  Flexible(
+                    flex: 4,
+                    child: const Text(
+                      "Indique la edificación que desea registrar",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: extraBigFont,
+                        color: Color(primaryColor),
+                      ),
+                    ),
+                  ),
+                  Spacer(),
+                ],
               ),
               const SizedBox(
                 height: 8,

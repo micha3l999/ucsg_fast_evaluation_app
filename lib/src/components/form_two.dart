@@ -81,10 +81,9 @@ class _FormTwoState extends State<FormTwo> {
   buildRoofStructure() {
     return [
       const Text(
-        " 2. Indique el material del techo",
+        " 1. Indique el material del techo",
         style: TextStyle(
-          fontSize: extraBigFont,
-          color: Color(primaryColor),
+          fontSize: bigFont,
         ),
       ),
       const SizedBox(
@@ -156,10 +155,9 @@ class _FormTwoState extends State<FormTwo> {
   buildColumnStructure() {
     return [
       const Text(
-        " 3. Indique el material usado para las columnas",
+        " 2. Indique el material usado para las columnas",
         style: TextStyle(
-          fontSize: extraBigFont,
-          color: Color(primaryColor),
+          fontSize: bigFont,
         ),
       ),
       const SizedBox(
@@ -207,10 +205,9 @@ class _FormTwoState extends State<FormTwo> {
   buildWallStructureForm() {
     return [
       const Text(
-        " 4. De que material estan construidas las paredes",
+        " 3. De que material estan construidas las paredes",
         style: TextStyle(
-          fontSize: extraBigFont,
-          color: Color(primaryColor),
+          fontSize: bigFont,
         ),
       ),
       const SizedBox(
@@ -270,10 +267,9 @@ class _FormTwoState extends State<FormTwo> {
   buildPreConnection() {
     return [
       const Text(
-        " 5. Existen conexiones prefabricadas?",
+        " 4. Existen conexiones prefabricadas?",
         style: TextStyle(
-          fontSize: extraBigFont,
-          color: Color(primaryColor),
+          fontSize: bigFont,
         ),
       ),
       const SizedBox(

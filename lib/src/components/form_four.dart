@@ -1,23 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:seguridad_evaluacion/src/utils/colors.dart';
 import 'package:seguridad_evaluacion/src/utils/dimensions.dart';
 
-enum Gas { yes, no }
-
-enum Electricity { yes, no }
-
-class FormThree extends StatefulWidget {
-  const FormThree({Key? key}) : super(key: key);
+class FormFour extends StatefulWidget {
+  const FormFour({Key? key}) : super(key: key);
 
   @override
-  _FormThreeState createState() => _FormThreeState();
+  _FormFourState createState() => _FormFourState();
 }
 
-class _FormThreeState extends State<FormThree> {
-  final TextEditingController _controllerCoating = TextEditingController();
-  final TextEditingController _controllerIllumination = TextEditingController();
-  final TextEditingController _controllerDepartures = TextEditingController();
-
+class _FormFourState extends State<FormFour> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -32,10 +23,9 @@ class _FormThreeState extends State<FormThree> {
                 children: const [
                   Spacer(),
                   Text(
-                    "Profundidad de la construcción",
+                    "Geotécnico",
                     style: TextStyle(
-                      fontSize: extraBigFont,
-                      color: Color(primaryColor),
+                      fontSize: bigFont,
                     ),
                   ),
                   Spacer(),
@@ -45,22 +35,7 @@ class _FormThreeState extends State<FormThree> {
                 height: 8,
               ),
               const Text(
-                " 6. Indique que estan hechos los revestimientos",
-                style: TextStyle(
-                  fontSize: bigFont,
-                ),
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              TextField(
-                controller: _controllerCoating,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              const Text(
-                " 7. Indique techos o artefactos de iluminación",
+                "9. ¿Existen pendientes o escombros?",
                 style: TextStyle(
                   fontSize: bigFont,
                 ),
@@ -70,10 +45,10 @@ class _FormThreeState extends State<FormThree> {
               ),
               TextField(),
               const SizedBox(
-                height: 8,
+                height: 16,
               ),
               const Text(
-                " 8. Indique cuantas escaleras y salidas",
+                "10. ¿Existen fisuras o movimientos de la tierra?",
                 style: TextStyle(
                   fontSize: bigFont,
                 ),

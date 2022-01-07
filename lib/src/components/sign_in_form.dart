@@ -32,7 +32,7 @@ class _SignInFormState extends State<SignInForm> {
                   "Identificación",
                   style: TextStyle(fontSize: mediumFont),
                 ),
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 alignment: Alignment.centerLeft,
               ),
               TextFormField(
@@ -53,7 +53,7 @@ class _SignInFormState extends State<SignInForm> {
                 },
                 decoration: InputDecoration(
                   helperText: _identificationHelper,
-                  helperStyle: TextStyle(
+                  helperStyle: const TextStyle(
                     color: Colors.red,
                   ),
                   border: OutlineInputBorder(
@@ -68,7 +68,7 @@ class _SignInFormState extends State<SignInForm> {
                   "Contraseña",
                   style: TextStyle(fontSize: mediumFont),
                 ),
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8),
                 alignment: Alignment.centerLeft,
               ),
               TextFormField(
@@ -91,7 +91,7 @@ class _SignInFormState extends State<SignInForm> {
                     borderRadius: BorderRadius.circular(5),
                   ),
                   helperText: _passwordHelper,
-                  helperStyle: TextStyle(
+                  helperStyle: const TextStyle(
                     color: Colors.red,
                   ),
                 ),
@@ -127,7 +127,7 @@ class _SignInFormState extends State<SignInForm> {
       if (apiResponse["success"] == true) {
         // Navigate to first evaluation form screen
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (_) => EvaluationForm()));
+            .push(MaterialPageRoute(builder: (_) => const EvaluationForm()));
       } else {
         switch (apiResponse["conflict"]) {
           case "PASSWORD":
