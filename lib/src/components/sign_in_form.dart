@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seguridad_evaluacion/src/components/primary_button.dart';
-import 'package:seguridad_evaluacion/src/pages/evaluation_form.dart';
+import 'package:seguridad_evaluacion/src/pages/home.dart';
 import 'package:seguridad_evaluacion/src/repository/sign_in.dart';
 import 'package:seguridad_evaluacion/src/utils/dimensions.dart';
 
@@ -127,7 +127,7 @@ class _SignInFormState extends State<SignInForm> {
       if (apiResponse["success"] == true) {
         // Navigate to first evaluation form screen
         Navigator.of(context)
-            .push(MaterialPageRoute(builder: (_) => const EvaluationForm()));
+            .push(MaterialPageRoute(builder: (_) => const Home()));
       } else {
         switch (apiResponse["conflict"]) {
           case "PASSWORD":

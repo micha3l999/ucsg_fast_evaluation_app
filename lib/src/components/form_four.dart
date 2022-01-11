@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seguridad_evaluacion/src/utils/colors.dart';
 import 'package:seguridad_evaluacion/src/utils/dimensions.dart';
 
 class FormFour extends StatefulWidget {
@@ -25,7 +26,8 @@ class _FormFourState extends State<FormFour> {
                   Text(
                     "Geotécnico",
                     style: TextStyle(
-                      fontSize: bigFont,
+                      color: Color(primaryColor),
+                      fontSize: extraBigFont,
                     ),
                   ),
                   Spacer(),
