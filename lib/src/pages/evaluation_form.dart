@@ -8,6 +8,7 @@ import 'package:seguridad_evaluacion/src/components/form_one.dart';
 import 'package:seguridad_evaluacion/src/components/form_three.dart';
 import 'package:seguridad_evaluacion/src/components/form_two.dart';
 import 'package:seguridad_evaluacion/src/components/primary_button.dart';
+import 'package:seguridad_evaluacion/src/providers/form_five_provider.dart';
 import 'package:seguridad_evaluacion/src/providers/form_four_provider.dart';
 import 'package:seguridad_evaluacion/src/providers/form_one_provider.dart';
 import 'package:seguridad_evaluacion/src/providers/form_three_provider.dart';
@@ -41,6 +42,9 @@ class _EvaluationFormState extends State<EvaluationForm> {
         ),
         ChangeNotifierProvider<FormFourProvider>(
           create: (_) => FormFourProvider(),
+        ),
+        ChangeNotifierProvider<FormFiveProvider>(
+          create: (_) => FormFiveProvider(),
         ),
       ],
       child: GestureDetector(
