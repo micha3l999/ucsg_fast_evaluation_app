@@ -48,9 +48,7 @@ class _FormOneState extends State<FormOne> {
                     groupValue: provider.radioValue,
                     value: StructureType.house,
                     onChanged: (StructureType? value) {
-                      setState(() {
-                        provider.radioValue = value;
-                      });
+                      provider.radioValueSetter = value;
                     },
                   ),
                 ),
@@ -60,9 +58,7 @@ class _FormOneState extends State<FormOne> {
                     groupValue: provider.radioValue,
                     value: StructureType.building,
                     onChanged: (StructureType? value) {
-                      setState(() {
-                        provider.radioValue = value;
-                      });
+                      provider.radioValueSetter = value;
                     },
                   ),
                 ),
@@ -72,9 +68,7 @@ class _FormOneState extends State<FormOne> {
                     groupValue: provider.radioValue,
                     value: StructureType.department,
                     onChanged: (StructureType? value) {
-                      setState(() {
-                        provider.radioValue = value;
-                      });
+                      provider.radioValueSetter = value;
                     },
                   ),
                 ),

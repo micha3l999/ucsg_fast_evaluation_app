@@ -5,8 +5,8 @@ enum StructureType { house, building, department }
 class FormOneProvider extends ChangeNotifier {
   StructureType? radioValue = StructureType.house;
 
-  void changeStructure(StructureType type) {
-    radioValue = type;
+  set radioValueSetter(StructureType? value) {
+    radioValue = value;
     notifyListeners();
   }
 }

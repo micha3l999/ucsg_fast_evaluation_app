@@ -8,7 +8,10 @@ import 'package:seguridad_evaluacion/src/components/form_one.dart';
 import 'package:seguridad_evaluacion/src/components/form_three.dart';
 import 'package:seguridad_evaluacion/src/components/form_two.dart';
 import 'package:seguridad_evaluacion/src/components/primary_button.dart';
+import 'package:seguridad_evaluacion/src/providers/form_four_provider.dart';
 import 'package:seguridad_evaluacion/src/providers/form_one_provider.dart';
+import 'package:seguridad_evaluacion/src/providers/form_three_provider.dart';
+import 'package:seguridad_evaluacion/src/providers/form_two_provider.dart';
 import 'package:seguridad_evaluacion/src/utils/colors.dart';
 import 'package:seguridad_evaluacion/src/utils/dimensions.dart';
 
@@ -29,7 +32,16 @@ class _EvaluationFormState extends State<EvaluationForm> {
       providers: [
         ChangeNotifierProvider<FormOneProvider>(
           create: (_) => FormOneProvider(),
-        )
+        ),
+        ChangeNotifierProvider<FormTwoProvider>(
+          create: (_) => FormTwoProvider(),
+        ),
+        ChangeNotifierProvider<FormThreeProvider>(
+          create: (_) => FormThreeProvider(),
+        ),
+        ChangeNotifierProvider<FormFourProvider>(
+          create: (_) => FormFourProvider(),
+        ),
       ],
       child: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
