@@ -8,17 +8,19 @@ import 'package:seguridad_evaluacion/src/providers/form_three_provider.dart';
 import 'package:seguridad_evaluacion/src/providers/form_two_provider.dart';
 
 class FormButtons extends StatefulWidget {
-  const FormButtons({
-    Key? key,
-    required this.initializeController,
-    required this.currentPage,
-    required this.updateCurrentValue,
-    required this.pageController,
-  }) : super(key: key);
+  const FormButtons(
+      {Key? key,
+      required this.initializeController,
+      required this.currentPage,
+      required this.updateCurrentValue,
+      required this.pageController,
+      required this.updateLoading})
+      : super(key: key);
 
   final Future<void> Function() initializeController;
-  final double currentPage;
   final void Function(double value) updateCurrentValue;
+  final void Function() updateLoading;
+  final double currentPage;
   final PageController pageController;
 
   @override
@@ -81,7 +83,9 @@ class _FormButtonsState extends State<FormButtons> {
               if (widget.currentPage != 4) {
                 widget.updateCurrentValue(widget.pageController.page!);
               } else if (widget.currentPage >= 4) {
+                widget.updateLoading();
                 sendData();
+                widget.updateLoading();
               }
             }),
       ],

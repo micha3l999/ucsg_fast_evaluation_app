@@ -5,66 +5,57 @@ import 'package:seguridad_evaluacion/src/dependencies/shared_preferences_keys.da
 import 'package:seguridad_evaluacion/src/dependencies/shared_preferences_repo.dart';
 import 'package:seguridad_evaluacion/src/network/api_instance.dart';
 
-abstract class SignInRepository {
-  static const signInUrl =
-      "https://pd02ohy27i.execute-api.us-east-2.amazonaws.com/prod/loginUser";
+abstract class ProfileRepository {
+  static const String getProfile =
+      "https://pd02ohy27i.execute-api.us-east-2.amazonaws.com/prod/get-user-data/";
 
   static final ApiInstance _apiInstance = ApiInstance.getInstance()!;
 
-  static Future<Map> signIn(String identification, String password) async {
-    Uri url = _apiInstance.getUrl(signInUrl);
+  static Future<Map> getUserData() async {
+    String? user =
+        await SharedPreferencesRepo.getPrefer(SharedPreferencesKeys.user);
+    String identification = "";
+    if (user != null) {
+      identification = jsonDecode(user)["id"];
+    }
+
+    String route = getProfile + identification;
+    Uri url = _apiInstance.getUrl(route);
 
     // Make Api Request
     try {
-      Response response = await _apiInstance.client.put(url,
-          body: jsonEncode({
-            "identification": identification,
-            "password": password,
-          }));
-
+      Response response = await _apiInstance.client.get(url);
       print(response.body);
-
       switch (response.statusCode) {
         case 200:
 
-          // Registration successfully
+          // Login successfully
           final Map responseConverted = jsonDecode(response.body);
-          SharedPreferencesRepo.setPrefer(SharedPreferencesKeys.user,
-              jsonEncode(responseConverted["user"]));
+
           return {
             "message": responseConverted["message"],
             "user": responseConverted["user"],
-            "success": true,
-            "code": 200,
+            "success": true
           };
         case 409:
 
-          // Code when user is not registered
+          // Response when the user is already registered
           String conflictMessage = jsonDecode(response.body);
 
           return {
             "message": conflictMessage,
+            "conflict": "ALREADY_REGISTERED",
             "success": false,
-            "conflict": "NOT_REGISTERED",
-          };
-        case 401:
-
-          // Response when the password is incorrect
-          String conflictMessage = jsonDecode(response.body);
-
-          return {
-            "message": conflictMessage,
-            "success": false,
-            "conflict": "PASSWORD",
           };
         default:
           return {
             "message": "Ha ocurrido un error",
+            "conflict": "DEFAULT_ERROR",
             "success": false,
           };
       }
     } catch (error) {
-      // Send common error response
+      // Catch error and send common error response
       return {
         "message": "Ha ocurrido un error",
         "success": false,

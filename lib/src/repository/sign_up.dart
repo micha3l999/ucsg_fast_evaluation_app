@@ -9,7 +9,8 @@ abstract class SignUpRepository {
 
   static final ApiInstance _apiInstance = ApiInstance.getInstance()!;
 
-  static Future<Map> signUp(String identification, String password) async {
+  static Future<Map> signUp(String identification, String password, String name,
+      String address, String age) async {
     Uri url = _apiInstance.getUrl(signUpUrl);
 
     // Make Api Request
@@ -21,6 +22,9 @@ abstract class SignUpRepository {
           body: jsonEncode({
             "identification": identification,
             "password": password,
+            "name": name,
+            "address": address,
+            "age": age,
           }));
 
       switch (response.statusCode) {

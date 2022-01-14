@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:seguridad_evaluacion/src/components/primary_button.dart';
 import 'package:seguridad_evaluacion/src/pages/evaluation_form.dart';
+import 'package:seguridad_evaluacion/src/pages/profile.dart';
 import 'package:seguridad_evaluacion/src/utils/colors.dart';
 
 class Home extends StatefulWidget {
@@ -28,8 +29,22 @@ class _HomeState extends State<Home> {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (_) => const EvaluationForm()));
                 }),
+            const SizedBox(
+              height: 8,
+            ),
             PrimaryButton(buttonText: "Consultar datos", onTap: () {}),
-            PrimaryButton(buttonText: "Administrar perfil", onTap: () {}),
+            const SizedBox(
+              height: 8,
+            ),
+            PrimaryButton(
+                buttonText: "Administrar perfil",
+                onTap: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (_) => UserProfile()));
+                }),
+            const SizedBox(
+              height: 8,
+            ),
           ],
         ),
       ),

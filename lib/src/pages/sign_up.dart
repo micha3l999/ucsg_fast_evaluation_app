@@ -30,6 +30,9 @@ class _SignUpState extends State<SignUp> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const SizedBox(
+                        height: 8,
+                      ),
                       const Text(
                         "Registre su cuenta para una inspección estructural ",
                         style: TextStyle(

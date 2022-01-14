@@ -86,6 +86,9 @@ class _SignInFormState extends State<SignInForm> {
                 onSaved: (String? value) {
                   _password = value;
                 },
+                obscureText: true,
+                enableSuggestions: false,
+                autocorrect: false,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(5),

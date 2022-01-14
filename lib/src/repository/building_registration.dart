@@ -38,6 +38,18 @@ abstract class BuildingRegistrationRepository {
         "preConnection": preConnection,
         "coatings": coatings,
         "illuminationThings": illuminationThings,
+        "stairsAndExits": stairsAndExits,
+        "hasGas": hasGas,
+        "hasElectricity": hasElectricity,
+        "hasSlopes": hasSlopes,
+        "hasCracks": hasCracks,
+        "buildingQualification": buildingQualification,
+        "inspectionPlace": inspectionPlace,
+        "installationAddress": installationAddress,
+        "restrictions": restrictions,
+        "inspectorObservation": inspectorObservation,
+        "emergencyComments": emergencyComments,
+        "inspectorIdentification": inspectorIdentification,
       });
 
       print(response.body);

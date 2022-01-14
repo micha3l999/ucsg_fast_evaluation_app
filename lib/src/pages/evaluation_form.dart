@@ -26,6 +26,7 @@ class EvaluationForm extends StatefulWidget {
 class _EvaluationFormState extends State<EvaluationForm> {
   final PageController _pageController = PageController();
   final ValueNotifier<double> _currentPage = ValueNotifier(0);
+  ValueNotifier<bool> _isLoading = ValueNotifier(false);
 
   @override
   Widget build(BuildContext context) {
@@ -67,29 +68,47 @@ class _EvaluationFormState extends State<EvaluationForm> {
           ),
           backgroundColor: const Color(primaryColor),
           body: SafeArea(
-            child: Container(
-              color: Colors.white,
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(normalPadding),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      buildPageView(),
-                      ValueListenableBuilder(
-                          valueListenable: _currentPage,
-                          builder: (_, value, child) {
-                            return FormButtons(
-                              initializeController: initializeController,
-                              currentPage: _currentPage.value,
-                              updateCurrentValue: updateCurrentPage,
-                              pageController: _pageController,
-                            );
-                          }),
-                    ],
+            child: Stack(
+              children: [
+                Container(
+                  color: Colors.white,
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(normalPadding),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          buildPageView(),
+                          ValueListenableBuilder(
+                              valueListenable: _currentPage,
+                              builder: (_, value, child) {
+                                return FormButtons(
+                                  initializeController: initializeController,
+                                  currentPage: _currentPage.value,
+                                  updateCurrentValue: updateCurrentPage,
+                                  pageController: _pageController,
+                                  updateLoading: changeIsLoading,
+                                );
+                              }),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                ValueListenableBuilder(
+                    valueListenable: _isLoading,
+                    builder: (_, bool value, child) {
+                      if (value) {
+                        return Container(
+                          color: const Color.fromRGBO(255, 255, 255, 0.7),
+                          child: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      }
+                      return SizedBox();
+                    }),
+              ],
             ),
           ),
         ),
@@ -126,5 +145,9 @@ class _EvaluationFormState extends State<EvaluationForm> {
 
   void updateCurrentPage(double currentPage) {
     _currentPage.value = currentPage;
+  }
+
+  void changeIsLoading() {
+    _isLoading.value = !_isLoading.value;
   }
 }

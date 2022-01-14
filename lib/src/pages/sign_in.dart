@@ -42,8 +42,8 @@ class _SignInState extends State<SignIn> {
                         ),
                       ),
                       GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
+                        onTap: () async {
+                          await Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => const SignUp()));
                         },
                         child: Center(
@@ -68,9 +68,9 @@ class _SignInState extends State<SignIn> {
           ),
           if (_isLoading)
             Container(
-              color: Color.fromRGBO(255, 255, 255, 0.7),
-              child: Center(
-                child: CircularProgressIndicator(),
+              color: const Color.fromRGBO(255, 255, 255, 0.7),
+              child: const Center(
+                child: const CircularProgressIndicator(),
               ),
             ),
         ],
