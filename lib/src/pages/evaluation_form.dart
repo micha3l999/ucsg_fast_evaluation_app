@@ -7,7 +7,7 @@ import 'package:seguridad_evaluacion/src/components/form_four.dart';
 import 'package:seguridad_evaluacion/src/components/form_one.dart';
 import 'package:seguridad_evaluacion/src/components/form_three.dart';
 import 'package:seguridad_evaluacion/src/components/form_two.dart';
-import 'package:seguridad_evaluacion/src/components/primary_button.dart';
+import 'package:seguridad_evaluacion/src/components/forms_buttons.dart';
 import 'package:seguridad_evaluacion/src/providers/form_five_provider.dart';
 import 'package:seguridad_evaluacion/src/providers/form_four_provider.dart';
 import 'package:seguridad_evaluacion/src/providers/form_one_provider.dart';
@@ -25,7 +25,7 @@ class EvaluationForm extends StatefulWidget {
 
 class _EvaluationFormState extends State<EvaluationForm> {
   final PageController _pageController = PageController();
-  double _currentPage = 0;
+  final ValueNotifier<double> _currentPage = ValueNotifier(0);
 
   @override
   Widget build(BuildContext context) {
@@ -76,47 +76,16 @@ class _EvaluationFormState extends State<EvaluationForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       buildPageView(),
-                      Row(
-                        children: [
-                          if (_currentPage != 0)
-                            FutureBuilder(
-                              future: initializeController(),
-                              builder: (_, AsyncSnapshot snap) {
-                                if (!snap.hasData || _currentPage == 0) {
-                                  /// Just return a placeholder widget, here it's nothing but you have to return something to avoid errors
-                                  return const SizedBox();
-                                }
-
-                                return PrimaryButton(
-                                    buttonText: "Anterior",
-                                    onTap: () async {
-                                      await _pageController.previousPage(
-                                          duration: const Duration(
-                                              milliseconds: 1000),
-                                          curve: Curves.easeInOut);
-                                      setState(() {
-                                        _currentPage = _pageController.page!;
-                                      });
-                                    });
-                              },
-                            ),
-                          const Spacer(),
-                          PrimaryButton(
-                              buttonText:
-                                  _currentPage >= 4 ? "Enviar" : "Siguiente",
-                              onTap: () async {
-                                await _pageController.nextPage(
-                                    duration:
-                                        const Duration(milliseconds: 1000),
-                                    curve: Curves.easeInOut);
-                                if (_currentPage != 4) {
-                                  setState(() {
-                                    _currentPage = _pageController.page!;
-                                  });
-                                }
-                              }),
-                        ],
-                      ),
+                      ValueListenableBuilder(
+                          valueListenable: _currentPage,
+                          builder: (_, value, child) {
+                            return FormButtons(
+                              initializeController: initializeController,
+                              currentPage: _currentPage.value,
+                              updateCurrentValue: updateCurrentPage,
+                              pageController: _pageController,
+                            );
+                          }),
                     ],
                   ),
                 ),
@@ -153,5 +122,9 @@ class _EvaluationFormState extends State<EvaluationForm> {
     });
 
     return completer.future;
+  }
+
+  void updateCurrentPage(double currentPage) {
+    _currentPage.value = currentPage;
   }
 }
