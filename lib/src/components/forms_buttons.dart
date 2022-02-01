@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:seguridad_evaluacion/src/components/primary_button.dart';
-import 'package:seguridad_evaluacion/src/providers/form_five_provider.dart';
 import 'package:seguridad_evaluacion/src/providers/form_four_provider.dart';
 import 'package:seguridad_evaluacion/src/providers/form_one_provider.dart';
 import 'package:seguridad_evaluacion/src/providers/form_three_provider.dart';
@@ -38,7 +37,7 @@ class _FormButtonsState extends State<FormButtons> with GlobalFunctions {
 
   late FormFourProvider formFourProvider;
 
-  late FormFiveProvider formFiveProvider;
+  //late FormFiveProvider formFiveProvider;
 
   @override
   void initState() {
@@ -49,7 +48,7 @@ class _FormButtonsState extends State<FormButtons> with GlobalFunctions {
     formTwoProvider = Provider.of<FormTwoProvider>(context, listen: false);
     formThreeProvider = Provider.of<FormThreeProvider>(context, listen: false);
     formFourProvider = Provider.of<FormFourProvider>(context, listen: false);
-    formFiveProvider = Provider.of<FormFiveProvider>(context, listen: false);
+    //formFiveProvider = Provider.of<FormFiveProvider>(context, listen: false);
   }
 
   @override
@@ -77,14 +76,14 @@ class _FormButtonsState extends State<FormButtons> with GlobalFunctions {
           ),
         const Spacer(),
         PrimaryButton(
-            buttonText: widget.currentPage >= 4 ? "Enviar" : "Siguiente",
+            buttonText: widget.currentPage >= 3 ? "Enviar" : "Siguiente",
             onTap: () async {
               await widget.pageController.nextPage(
                   duration: const Duration(milliseconds: 1000),
                   curve: Curves.easeInOut);
-              if (widget.currentPage != 4) {
+              if (widget.currentPage != 3) {
                 widget.updateCurrentValue(widget.pageController.page!);
-              } else if (widget.currentPage >= 4) {
+              } else if (widget.currentPage >= 3) {
                 widget.updateLoading();
                 sendData();
                 widget.updateLoading();
@@ -110,13 +109,15 @@ class _FormButtonsState extends State<FormButtons> with GlobalFunctions {
         radioToString(formThreeProvider.radioValueElectricity),
         radioToString(formFourProvider.radioValueSlopes),
         radioToString(formFourProvider.radioValueCracks),
-        radioToString(formFiveProvider.radioValueQualification),
-        radioToString(formFiveProvider.radioValueInspectionPlace),
-        formFiveProvider.buildingAddressController.text,
-        formFiveProvider.buildingRestrictionController.text,
-        formFiveProvider.inspectorObservationController.text,
-        formFiveProvider.inspectedForController.text,
-        formFiveProvider.inspectorIdentificationController.text);
+        //
+        "Por calificar", //radioToString(formFiveProvider.radioValueQualification),
+        "Por calificar", //radioToString(formFiveProvider.radioValueInspectionPlace),
+        "Por calificar", //formFiveProvider.buildingAddressController.text,
+        "Por calificar", //formFiveProvider.buildingRestrictionController.text,
+        "Por calificar", //formFiveProvider.inspectorObservationController.text,
+        "Por calificar", //formFiveProvider.inspectedForController.text,
+        "Por calificar"); //formFiveProvider.inspectorIdentificationController.text);
+    //
     this.widget.updateLoading();
 
     // Show dialog depends on answer
@@ -124,9 +125,6 @@ class _FormButtonsState extends State<FormButtons> with GlobalFunctions {
       await informationDialog(context,
           title: "Edificación registrada correctamente");
       Navigator.of(context).pop();
-    } else if (response["conflict"] == "INSPECTOR_IDENTIFICATION") {
-      await informationDialog(context,
-          title: "No se encontró la identificación del inspector");
     } else {
       await informationDialog(context,
           title: "Hubo un problema al registrar la edificación");

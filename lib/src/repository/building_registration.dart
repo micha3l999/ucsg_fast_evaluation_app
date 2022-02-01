@@ -90,4 +90,53 @@ abstract class BuildingRegistrationRepository {
       "conflict": "ERROR",
     };
   }
+
+  static Future<Map> updateBuildingRegistration(
+      String buildingQualification,
+      String inspectionPlace,
+      String installationAddress,
+      String restrictions,
+      String inspectorObservation,
+      String emergencyComments,
+      String inspectorIdentification,
+      String buildingId,
+      String userId) async {
+    // Get url and make request to API
+    Uri url = _apiInstance.getUrl(registrationUrl);
+
+    try {
+      Response response = await _apiInstance.client.put(url,
+          body: jsonEncode({
+            "buildingQualification": buildingQualification,
+            "inspectionPlace": inspectionPlace,
+            "installationAddress": installationAddress,
+            "restrictions": restrictions,
+            "inspectorObservation": inspectorObservation,
+            "emergencyComments": emergencyComments,
+            "inspectorIdentification": inspectorIdentification,
+            "userId": userId,
+            "buildingId": buildingId,
+          }));
+      switch (response.statusCode) {
+        case 200:
+          return {
+            "success": true,
+            "conflict": "NONE",
+          };
+        case 400:
+          return {
+            "success": false,
+            "conflict": "Faltan datos",
+          };
+        default:
+          break;
+      }
+    } catch (error) {
+      print(error);
+    }
+    return {
+      "success": false,
+      "conflict": "Hubo un error",
+    };
+  }
 }

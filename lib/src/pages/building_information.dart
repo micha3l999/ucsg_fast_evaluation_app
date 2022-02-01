@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:seguridad_evaluacion/src/components/primary_button.dart';
+import 'package:seguridad_evaluacion/src/pages/qualify_building.dart';
 import 'package:seguridad_evaluacion/src/repository/all_user_data.dart';
 import 'package:seguridad_evaluacion/src/utils/colors.dart';
 import 'package:seguridad_evaluacion/src/utils/dimensions.dart';
@@ -17,6 +19,8 @@ class BuildingInformation extends StatefulWidget {
 }
 
 class _BuildingInformationState extends State<BuildingInformation> {
+  ValueNotifier<bool> _loading = ValueNotifier(false);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,71 +28,110 @@ class _BuildingInformationState extends State<BuildingInformation> {
         title: const Text("Evaluación de seguridad"),
         backgroundColor: const Color(primaryColor),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(normalPadding),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 8,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 4),
-              child: Row(
-                children: [
-                  const Spacer(),
-                  Text(
-                    "Datos de la edificación",
-                    style: TextStyle(
-                      color: Color(primaryColor),
-                      fontSize: 22,
-                    ),
+      body: Stack(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(normalPadding),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 8,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 4),
+                  child: Row(
+                    children: [
+                      const Spacer(),
+                      Text(
+                        "Datos de la edificación",
+                        style: TextStyle(
+                          color: Color(primaryColor),
+                          fontSize: 22,
+                        ),
+                      ),
+                      const Spacer(),
+                    ],
                   ),
-                  const Spacer(),
-                  IconButton(
-                    icon: Icon(
-                      Icons.delete,
-                      color: Colors.red,
-                    ),
-                    onPressed: () async {
-                      await AllUserDataRepository.deleteBuilding(
-                          widget.buildingId, widget.userId);
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            const Divider(),
-            Expanded(
-              child: FutureBuilder(
-                builder: (_, AsyncSnapshot<Map> snapshot) {
-                  if (snapshot.hasData) {
-                    if (snapshot.data!["success"]) {
-                      return buildInformation(
-                          snapshot.data!["data"]["building"]);
-                    } else {
-                      return Center(
-                        child: Text(
-                            "Ocurrió un error, por favor vuelve a intentarlo"),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                const Divider(),
+                Expanded(
+                  child: FutureBuilder(
+                    builder: (_, AsyncSnapshot<Map> snapshot) {
+                      if (snapshot.hasData) {
+                        if (snapshot.data!["success"]) {
+                          return buildInformation(
+                              snapshot.data!["data"]["building"]);
+                        } else {
+                          return Center(
+                            child: Text(
+                                "Ocurrió un error, por favor vuelve a intentarlo"),
+                          );
+                        }
+                      }
+                      return Container(
+                        color: const Color.fromRGBO(255, 255, 255, 0.7),
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
                       );
-                    }
-                  }
+                    },
+                    future: AllUserDataRepository.getBuildingInformation(
+                        widget.buildingId),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    children: [
+                      const Spacer(),
+                      TextButton(
+                          onPressed: () async {
+                            setState(() {
+                              _loading.value = !_loading.value;
+                            });
+                            await AllUserDataRepository.deleteBuilding(
+                                widget.buildingId, widget.userId);
+                            setState(() {
+                              _loading.value = !_loading.value;
+                            });
+                            Navigator.of(context).pop();
+                          },
+                          child: Text("Eliminar")),
+                      const SizedBox(
+                        width: 16,
+                      ),
+                      PrimaryButton(
+                          buttonText: "Calificar",
+                          onTap: () async {
+                            await Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => QualifyBuilding(
+                                      buildingId: widget.buildingId,
+                                      userId: widget.userId,
+                                    )));
+                            setState(() {});
+                          }),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+          ValueListenableBuilder<bool>(
+              valueListenable: _loading,
+              builder: (context, value, child) {
+                if (value)
                   return Container(
                     color: const Color.fromRGBO(255, 255, 255, 0.7),
                     child: const Center(
                       child: CircularProgressIndicator(),
                     ),
                   );
-                },
-                future: AllUserDataRepository.getBuildingInformation(
-                    widget.buildingId),
-              ),
-            ),
-          ],
-        ),
+                return Container();
+              }),
+        ],
       ),
     );
   }
@@ -171,8 +214,8 @@ class _BuildingInformationState extends State<BuildingInformation> {
 
   buildListTileBuilding(String title, String value) {
     return ListTile(
-      title: Text(title),
-      trailing: Text(value),
+      subtitle: Text(title),
+      title: Text(value),
     );
   }
 }
