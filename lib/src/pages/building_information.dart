@@ -67,7 +67,6 @@ class _BuildingInformationState extends State<BuildingInformation> {
                 builder: (_, AsyncSnapshot<Map> snapshot) {
                   if (snapshot.hasData) {
                     if (snapshot.data!["success"]) {
-                      print("success");
                       return buildInformation(
                           snapshot.data!["data"]["building"]);
                     } else {
