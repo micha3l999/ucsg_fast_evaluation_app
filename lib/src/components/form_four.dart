@@ -64,7 +64,7 @@ class _FormFourState extends State<FormFour> {
         title: const Text("Sí"),
         leading: Radio<Slopes>(
           groupValue: provider.radioValueSlopes,
-          value: Slopes.yes,
+          value: Slopes.Si,
           onChanged: (Slopes? value) {
             provider.changeRadioValueSlopes(value);
           },
@@ -74,7 +74,7 @@ class _FormFourState extends State<FormFour> {
         title: const Text("No"),
         leading: Radio<Slopes>(
           groupValue: provider.radioValueSlopes,
-          value: Slopes.no,
+          value: Slopes.No,
           onChanged: (Slopes? value) {
             provider.changeRadioValueSlopes(value);
           },
@@ -98,7 +98,7 @@ class _FormFourState extends State<FormFour> {
         title: const Text("Sí"),
         leading: Radio<Cracks>(
           groupValue: provider.radioValueCracks,
-          value: Cracks.yes,
+          value: Cracks.Si,
           onChanged: (Cracks? value) {
             provider.changeRadioValueCracks(value);
           },
@@ -108,7 +108,7 @@ class _FormFourState extends State<FormFour> {
         title: const Text("No"),
         leading: Radio<Cracks>(
           groupValue: provider.radioValueCracks,
-          value: Cracks.no,
+          value: Cracks.No,
           onChanged: (Cracks? value) {
             provider.changeRadioValueCracks(value);
           },

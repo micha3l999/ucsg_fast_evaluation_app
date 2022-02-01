@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:seguridad_evaluacion/src/components/scaffold_login.dart';
 import 'package:seguridad_evaluacion/src/components/sign_in_form.dart';
 import 'package:seguridad_evaluacion/src/pages/sign_up.dart';
+import 'package:seguridad_evaluacion/src/pages/update_password.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -27,6 +28,9 @@ class _SignInState extends State<SignIn> {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
+                      const SizedBox(
+                        height: 24,
+                      ),
                       Container(
                         height: MediaQuery.of(context).size.height * 0.2,
                         padding: const EdgeInsets.all(20),
@@ -59,7 +63,32 @@ class _SignInState extends State<SignIn> {
                                 ]),
                           ),
                         ),
-                      )
+                      ),
+                      const SizedBox(
+                        height: 48,
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          await Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const UpdatePassword()));
+                        },
+                        child: Center(
+                          child: RichText(
+                            text: const TextSpan(
+                                text: "",
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 14),
+                                children: [
+                                  TextSpan(
+                                      text: "¿Olvidastes tu contraseña?",
+                                      style: TextStyle(color: Colors.blue)),
+                                ]),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
                     ],
                   ),
                 ),

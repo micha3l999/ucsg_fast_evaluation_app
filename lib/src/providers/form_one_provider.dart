@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-enum StructureType { house, building, department }
+enum StructureType { Casa, Edificio, Departamento }
 
 class FormOneProvider extends ChangeNotifier {
-  StructureType? radioValue = StructureType.house;
+  StructureType? radioValue = StructureType.Casa;
 
   set radioValueSetter(StructureType? value) {
     radioValue = value;

@@ -52,18 +52,7 @@ class _EvaluationFormState extends State<EvaluationForm> {
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
           appBar: AppBar(
-            title: Row(
-              children: [
-                const Text("Evaluación de seguridad"),
-                const Spacer(),
-                IconButton(
-                  icon: const Icon(Icons.logout),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ),
+            title: const Text("Evaluación de seguridad"),
             backgroundColor: const Color(primaryColor),
           ),
           backgroundColor: const Color(primaryColor),

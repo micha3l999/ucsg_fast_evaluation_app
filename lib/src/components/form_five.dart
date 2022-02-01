@@ -153,7 +153,7 @@ class _FormFiveState extends State<FormFive> {
         title: const Text("Inspeccionado"),
         leading: Radio<BuildingQualification>(
           groupValue: provider.radioValueQualification,
-          value: BuildingQualification.checked,
+          value: BuildingQualification.Chequeado,
           onChanged: (BuildingQualification? value) {
             provider.changeRadioValueQualification(value);
           },
@@ -163,7 +163,7 @@ class _FormFiveState extends State<FormFive> {
         title: const Text("Inseguro"),
         leading: Radio<BuildingQualification>(
           groupValue: provider.radioValueQualification,
-          value: BuildingQualification.insecure,
+          value: BuildingQualification.Inseguro,
           onChanged: (BuildingQualification? value) {
             provider.changeRadioValueQualification(value);
           },
@@ -173,7 +173,7 @@ class _FormFiveState extends State<FormFive> {
         title: const Text("Uso restringido"),
         leading: Radio<BuildingQualification>(
           groupValue: provider.radioValueQualification,
-          value: BuildingQualification.restrictedUse,
+          value: BuildingQualification.Uso_restringido,
           onChanged: (BuildingQualification? value) {
             provider.changeRadioValueQualification(value);
           },
@@ -194,7 +194,7 @@ class _FormFiveState extends State<FormFive> {
         title: const Text("Interior"),
         leading: Radio<InspectionPlace>(
           groupValue: provider.radioValueInspectionPlace,
-          value: InspectionPlace.inside,
+          value: InspectionPlace.Interior,
           onChanged: (InspectionPlace? value) {
             provider.changeRadioValueInspectionPlace(value);
           },
@@ -204,7 +204,7 @@ class _FormFiveState extends State<FormFive> {
         title: const Text("Exterior"),
         leading: Radio<InspectionPlace>(
           groupValue: provider.radioValueInspectionPlace,
-          value: InspectionPlace.outside,
+          value: InspectionPlace.Exterior,
           onChanged: (InspectionPlace? value) {
             provider.changeRadioValueInspectionPlace(value);
           },

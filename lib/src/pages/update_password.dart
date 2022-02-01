@@ -1,40 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:seguridad_evaluacion/src/components/primary_button.dart';
 import 'package:seguridad_evaluacion/src/repository/profile.dart';
 import 'package:seguridad_evaluacion/src/utils/colors.dart';
 import 'package:seguridad_evaluacion/src/utils/dimensions.dart';
 import 'package:seguridad_evaluacion/src/utils/global_functions.dart';
 
-class UpdateUserData extends StatefulWidget {
-  const UpdateUserData({Key? key}) : super(key: key);
+class UpdatePassword extends StatefulWidget {
+  const UpdatePassword({Key? key}) : super(key: key);
 
   @override
-  _UpdateUserDataState createState() => _UpdateUserDataState();
+  _UpdatePasswordState createState() => _UpdatePasswordState();
 }
 
-class _UpdateUserDataState extends State<UpdateUserData> with GlobalFunctions {
+class _UpdatePasswordState extends State<UpdatePassword> with GlobalFunctions {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _identificationController =
-          TextEditingController(),
-      _nameController = TextEditingController(),
-      _addressController = TextEditingController(),
-      _ageController = TextEditingController(),
-      _passwordController = TextEditingController(),
-      _passwordRepeatedController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController(),
+      _passwordRepeatedController = TextEditingController(),
+      _identificationController = TextEditingController();
   String _passwordHelper = "";
-  ValueNotifier<bool> _loading = ValueNotifier(false);
-
+  final ValueNotifier<bool> _loading = ValueNotifier(false);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.done),
-          backgroundColor: Color(primaryColor),
-          onPressed: () {
-            sendData();
-          },
-        ),
         appBar: AppBar(
           backgroundColor: const Color(primaryColor),
           title: Text("Evaluación de seguridad"),
@@ -53,7 +42,7 @@ class _UpdateUserDataState extends State<UpdateUserData> with GlobalFunctions {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            "Actualización de datos",
+                            "Actualización de contraseña",
                             style: TextStyle(
                               color: Color(primaryColor),
                               fontSize: 22,
@@ -62,38 +51,16 @@ class _UpdateUserDataState extends State<UpdateUserData> with GlobalFunctions {
                           const SizedBox(
                             height: 22,
                           ),
-                          const Text("Nombre completo"),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: normalPadding),
-                            child: TextFormField(
-                              controller: _nameController,
-                              validator: (String? value) {},
-                              decoration:
-                                  InputDecoration(border: OutlineInputBorder()),
-                            ),
-                          ),
-                          Text("Dirección de la vivienda"),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: normalPadding),
-                            child: TextFormField(
-                              controller: _addressController,
-                              validator: (String? value) {},
-                              decoration: const InputDecoration(
-                                  border: OutlineInputBorder()),
-                            ),
-                          ),
-                          const Text("Edad"),
+                          Text("Identificación"),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: normalPadding),
                             child: TextFormField(
                               keyboardType: TextInputType.number,
-                              controller: _ageController,
+                              controller: _identificationController,
                               validator: (String? value) {},
-                              decoration:
-                                  InputDecoration(border: OutlineInputBorder()),
+                              decoration: const InputDecoration(
+                                  border: OutlineInputBorder()),
                             ),
                           ),
                           const Text("Nueva contraseña"),
@@ -102,7 +69,6 @@ class _UpdateUserDataState extends State<UpdateUserData> with GlobalFunctions {
                                 vertical: normalPadding),
                             child: TextFormField(
                               controller: _passwordController,
-                              keyboardType: TextInputType.number,
                               validator: (String? value) {},
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
@@ -115,7 +81,6 @@ class _UpdateUserDataState extends State<UpdateUserData> with GlobalFunctions {
                                 vertical: normalPadding),
                             child: TextFormField(
                               controller: _passwordRepeatedController,
-                              keyboardType: TextInputType.number,
                               validator: (String? value) {},
                               decoration: InputDecoration(
                                 helperText: _passwordHelper,
@@ -125,6 +90,13 @@ class _UpdateUserDataState extends State<UpdateUserData> with GlobalFunctions {
                                 border: OutlineInputBorder(),
                               ),
                             ),
+                          ),
+                          PrimaryButton(
+                            buttonText: "Actualizar contraseña",
+                            onTap: () {
+                              sendData();
+                              Navigator.of(context).pop();
+                            },
                           ),
                         ],
                       ),
@@ -154,13 +126,10 @@ class _UpdateUserDataState extends State<UpdateUserData> with GlobalFunctions {
   Future sendData() async {
     _loading.value = true;
 
-    if (_nameController.text.isEmpty &&
-        _ageController.text.isEmpty &&
-        _addressController.text.isEmpty &&
+    if (_identificationController.text.isEmpty &&
         _passwordController.text.isEmpty &&
         _passwordRepeatedController.text.isEmpty) {
-      informationDialog(context,
-          title: "Añade datos para poder acualizar tu perfil");
+      informationDialog(context, title: "Completa todos los campos");
       _loading.value = false;
       return;
     }
@@ -173,14 +142,11 @@ class _UpdateUserDataState extends State<UpdateUserData> with GlobalFunctions {
     }
 
     Map mapResponse = await ProfileRepository.updateUserData(
-        _nameController.text,
-        _addressController.text,
-        _ageController.text,
-        _passwordController.text);
+        "", "", "", _passwordController.text, _identificationController.text);
 
     if (mapResponse["success"]) {
       informationDialog(context,
-          title: "El perfil fue actualizado correctamente");
+          title: "La contraseña fue actualizada correctamente");
     } else {
       informationDialog(context,
           title: "Opps, hubo un error por favor intentalo nuevamente");

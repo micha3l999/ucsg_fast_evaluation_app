@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
 enum BuildingQualification {
-  checked,
-  insecure,
-  restrictedUse,
+  Chequeado,
+  Inseguro,
+  Uso_restringido,
 }
 
 enum InspectionPlace {
-  inside,
-  outside,
+  Interior,
+  Exterior,
 }
 
 class FormFiveProvider extends ChangeNotifier {
   BuildingQualification? radioValueQualification =
-      BuildingQualification.checked;
+      BuildingQualification.Chequeado;
 
-  InspectionPlace? radioValueInspectionPlace = InspectionPlace.outside;
+  InspectionPlace? radioValueInspectionPlace = InspectionPlace.Exterior;
 
   final TextEditingController buildingAddressController =
       TextEditingController();

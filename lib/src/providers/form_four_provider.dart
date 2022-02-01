@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
 enum Slopes {
-  yes,
-  no,
+  Si,
+  No,
 }
 
 enum Cracks {
-  yes,
-  no,
+  Si,
+  No,
 }
 
 class FormFourProvider extends ChangeNotifier {
-  Slopes? radioValueSlopes = Slopes.no;
-  Cracks? radioValueCracks = Cracks.no;
+  Slopes? radioValueSlopes = Slopes.No;
+  Cracks? radioValueCracks = Cracks.No;
 
   changeRadioValueSlopes(Slopes? value) {
     radioValueSlopes = value;

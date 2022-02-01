@@ -109,7 +109,7 @@ class _FormThreeState extends State<FormThree> {
         title: const Text("Sí"),
         leading: Radio<Gas>(
           groupValue: provider.radioValueGas,
-          value: Gas.yes,
+          value: Gas.Si,
           onChanged: (Gas? value) {
             provider.changeRadioValueGas(value);
           },
@@ -119,7 +119,7 @@ class _FormThreeState extends State<FormThree> {
         title: const Text("No"),
         leading: Radio<Gas>(
           groupValue: provider.radioValueGas,
-          value: Gas.no,
+          value: Gas.No,
           onChanged: (Gas? value) {
             provider.changeRadioValueGas(value);
           },
@@ -143,7 +143,7 @@ class _FormThreeState extends State<FormThree> {
         title: const Text("Sí"),
         leading: Radio<Electricity>(
           groupValue: provider.radioValueElectricity,
-          value: Electricity.yes,
+          value: Electricity.Si,
           onChanged: (Electricity? value) {
             provider.changeRadioValueElectricity(value);
           },
@@ -153,7 +153,7 @@ class _FormThreeState extends State<FormThree> {
         title: const Text("No"),
         leading: Radio<Electricity>(
           groupValue: provider.radioValueElectricity,
-          value: Electricity.no,
+          value: Electricity.No,
           onChanged: (Electricity? value) {
             provider.changeRadioValueElectricity(value);
           },

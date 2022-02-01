@@ -69,7 +69,7 @@ class _FormTwoState extends State<FormTwo> {
         title: const Text("Cubiertas metálicas"),
         leading: Radio<StructureType>(
           groupValue: provider.radioValueRoof,
-          value: StructureType.metalCovers,
+          value: StructureType.Cubiertas_de_metal,
           onChanged: (StructureType? value) {
             provider.changeRadioValueRoof(value);
           },
@@ -79,7 +79,7 @@ class _FormTwoState extends State<FormTwo> {
         title: const Text("Cubiertas onduladas de fibrocemento"),
         leading: Radio<StructureType>(
           groupValue: provider.radioValueRoof,
-          value: StructureType.corrugatedFiberCementRoofing,
+          value: StructureType.Techos_de_fibrocemento_corrugado,
           onChanged: (StructureType? value) {
             provider.changeRadioValueRoof(value);
           },
@@ -89,7 +89,7 @@ class _FormTwoState extends State<FormTwo> {
         title: const Text("Cubiertas de tejas asfálticas"),
         leading: Radio<StructureType>(
           groupValue: provider.radioValueRoof,
-          value: StructureType.asphaltTileRoofs,
+          value: StructureType.Techos_de_tejas_de_asfalto,
           onChanged: (StructureType? value) {
             provider.changeRadioValueRoof(value);
           },
@@ -99,7 +99,7 @@ class _FormTwoState extends State<FormTwo> {
         title: const Text("Cubiertas autoportantes"),
         leading: Radio<StructureType>(
           groupValue: provider.radioValueRoof,
-          value: StructureType.selfSupportingRoofs,
+          value: StructureType.Techos_autoportantes,
           onChanged: (StructureType? value) {
             provider.changeRadioValueRoof(value);
           },
@@ -109,7 +109,7 @@ class _FormTwoState extends State<FormTwo> {
         title: const Text("Cubiertas de policarbonato"),
         leading: Radio<StructureType>(
           groupValue: provider.radioValueRoof,
-          value: StructureType.polycarbonateCovers,
+          value: StructureType.Cubiertas_de_policarbonato,
           onChanged: (StructureType? value) {
             provider.changeRadioValueRoof(value);
           },
@@ -133,7 +133,7 @@ class _FormTwoState extends State<FormTwo> {
         title: const Text("Concreto"),
         leading: Radio<ColumnStructures>(
           groupValue: provider.radioValueColumn,
-          value: ColumnStructures.concrete,
+          value: ColumnStructures.Concreto,
           onChanged: (ColumnStructures? value) {
             provider.changeRadioValueColumn(value);
           },
@@ -143,7 +143,7 @@ class _FormTwoState extends State<FormTwo> {
         title: const Text("Acero"),
         leading: Radio<ColumnStructures>(
           groupValue: provider.radioValueColumn,
-          value: ColumnStructures.steel,
+          value: ColumnStructures.Acero,
           onChanged: (ColumnStructures? value) {
             provider.changeRadioValueColumn(value);
           },
@@ -153,7 +153,7 @@ class _FormTwoState extends State<FormTwo> {
         title: const Text("Madera"),
         leading: Radio<ColumnStructures>(
           groupValue: provider.radioValueColumn,
-          value: ColumnStructures.wood,
+          value: ColumnStructures.Madera,
           onChanged: (ColumnStructures? value) {
             provider.changeRadioValueColumn(value);
           },
@@ -177,7 +177,7 @@ class _FormTwoState extends State<FormTwo> {
         title: const Text("Concreto"),
         leading: Radio<WallStructure>(
           groupValue: provider.radioValueWall,
-          value: WallStructure.concrete,
+          value: WallStructure.Concreto,
           onChanged: (WallStructure? value) {
             provider.changeRadioValueWall(value);
           },
@@ -187,7 +187,7 @@ class _FormTwoState extends State<FormTwo> {
         title: const Text("Madera"),
         leading: Radio<WallStructure>(
           groupValue: provider.radioValueWall,
-          value: WallStructure.wood,
+          value: WallStructure.Madera,
           onChanged: (WallStructure? value) {
             provider.changeRadioValueWall(value);
           },
@@ -197,7 +197,7 @@ class _FormTwoState extends State<FormTwo> {
         title: const Text("Ladrillo"),
         leading: Radio<WallStructure>(
           groupValue: provider.radioValueWall,
-          value: WallStructure.brick,
+          value: WallStructure.Ladrillo,
           onChanged: (WallStructure? value) {
             provider.changeRadioValueWall(value);
           },
@@ -207,7 +207,7 @@ class _FormTwoState extends State<FormTwo> {
         title: const Text("Piedra"),
         leading: Radio<WallStructure>(
           groupValue: provider.radioValueWall,
-          value: WallStructure.stone,
+          value: WallStructure.Piedra,
           onChanged: (WallStructure? value) {
             provider.changeRadioValueWall(value);
           },
@@ -231,7 +231,7 @@ class _FormTwoState extends State<FormTwo> {
         title: const Text("Sí"),
         leading: Radio<Pre>(
           groupValue: provider.radioValuePre,
-          value: Pre.yes,
+          value: Pre.Si,
           onChanged: (Pre? value) {
             provider.changeRadioValuePre(value);
           },
@@ -241,7 +241,7 @@ class _FormTwoState extends State<FormTwo> {
         title: const Text("No"),
         leading: Radio<Pre>(
           groupValue: provider.radioValuePre,
-          value: Pre.no,
+          value: Pre.No,
           onChanged: (Pre? value) {
             provider.changeRadioValuePre(value);
           },

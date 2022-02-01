@@ -46,7 +46,7 @@ class _FormOneState extends State<FormOne> {
                   title: const Text("Casa"),
                   leading: Radio<StructureType>(
                     groupValue: provider.radioValue,
-                    value: StructureType.house,
+                    value: StructureType.Casa,
                     onChanged: (StructureType? value) {
                       provider.radioValueSetter = value;
                     },
@@ -56,7 +56,7 @@ class _FormOneState extends State<FormOne> {
                   title: const Text("Edificio"),
                   leading: Radio<StructureType>(
                     groupValue: provider.radioValue,
-                    value: StructureType.building,
+                    value: StructureType.Edificio,
                     onChanged: (StructureType? value) {
                       provider.radioValueSetter = value;
                     },
@@ -66,7 +66,7 @@ class _FormOneState extends State<FormOne> {
                   title: const Text("Departamento"),
                   leading: Radio<StructureType>(
                     groupValue: provider.radioValue,
-                    value: StructureType.department,
+                    value: StructureType.Departamento,
                     onChanged: (StructureType? value) {
                       provider.radioValueSetter = value;
                     },

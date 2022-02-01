@@ -6,6 +6,8 @@ import 'package:seguridad_evaluacion/src/providers/form_four_provider.dart';
 import 'package:seguridad_evaluacion/src/providers/form_one_provider.dart';
 import 'package:seguridad_evaluacion/src/providers/form_three_provider.dart';
 import 'package:seguridad_evaluacion/src/providers/form_two_provider.dart';
+import 'package:seguridad_evaluacion/src/repository/building_registration.dart';
+import 'package:seguridad_evaluacion/src/utils/global_functions.dart';
 
 class FormButtons extends StatefulWidget {
   const FormButtons(
@@ -27,7 +29,7 @@ class FormButtons extends StatefulWidget {
   State<FormButtons> createState() => _FormButtonsState();
 }
 
-class _FormButtonsState extends State<FormButtons> {
+class _FormButtonsState extends State<FormButtons> with GlobalFunctions {
   late FormOneProvider formOneProvider;
 
   late FormTwoProvider formTwoProvider;
@@ -92,9 +94,42 @@ class _FormButtonsState extends State<FormButtons> {
     );
   }
 
-  sendData() {
-    print("sending Data");
-    print(formOneProvider.radioValue);
-    print(formFiveProvider.radioValueQualification);
+  Future sendData() async {
+    // Send request and show loading in the form registration
+    this.widget.updateLoading();
+    Map response = await BuildingRegistrationRepository.sendRegistrationInfo(
+        radioToString(formOneProvider.radioValue),
+        radioToString(formTwoProvider.radioValueRoof),
+        radioToString(formTwoProvider.radioValueColumn),
+        radioToString(formTwoProvider.radioValueWall),
+        radioToString(formTwoProvider.radioValuePre),
+        formThreeProvider.controllerCoating.text,
+        formThreeProvider.controllerIllumination.text,
+        formThreeProvider.controllerDepartures.text,
+        radioToString(formThreeProvider.radioValueGas),
+        radioToString(formThreeProvider.radioValueElectricity),
+        radioToString(formFourProvider.radioValueSlopes),
+        radioToString(formFourProvider.radioValueCracks),
+        radioToString(formFiveProvider.radioValueQualification),
+        radioToString(formFiveProvider.radioValueInspectionPlace),
+        formFiveProvider.buildingAddressController.text,
+        formFiveProvider.buildingRestrictionController.text,
+        formFiveProvider.inspectorObservationController.text,
+        formFiveProvider.inspectedForController.text,
+        formFiveProvider.inspectorIdentificationController.text);
+    this.widget.updateLoading();
+
+    // Show dialog depends on answer
+    if (response["success"]) {
+      await informationDialog(context,
+          title: "Edificación registrada correctamente");
+      Navigator.of(context).pop();
+    } else if (response["conflict"] == "INSPECTOR_IDENTIFICATION") {
+      await informationDialog(context,
+          title: "No se encontró la identificación del inspector");
+    } else {
+      await informationDialog(context,
+          title: "Hubo un problema al registrar la edificación");
+    }
   }
 }

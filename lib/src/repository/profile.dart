@@ -8,7 +8,8 @@ import 'package:seguridad_evaluacion/src/network/api_instance.dart';
 abstract class ProfileRepository {
   static const String getProfile =
       "https://pd02ohy27i.execute-api.us-east-2.amazonaws.com/prod/get-user-data/";
-
+  static const String updateProfile =
+      "https://pd02ohy27i.execute-api.us-east-2.amazonaws.com/prod/update-user-data";
   static final ApiInstance _apiInstance = ApiInstance.getInstance()!;
 
   static Future<Map> getUserData() async {
@@ -25,7 +26,6 @@ abstract class ProfileRepository {
     // Make Api Request
     try {
       Response response = await _apiInstance.client.get(url);
-      print(response.body);
       switch (response.statusCode) {
         case 200:
 
@@ -61,5 +61,48 @@ abstract class ProfileRepository {
         "success": false,
       };
     }
+  }
+
+  static Future<Map> updateUserData(
+      String name, String address, String age, String password,
+      [String identification = ""]) async {
+    if (identification.isEmpty) {
+      String? user =
+          await SharedPreferencesRepo.getPrefer(SharedPreferencesKeys.user);
+      if (user != null) {
+        identification = jsonDecode(user)["id"];
+      }
+    }
+
+    Uri url = _apiInstance.getUrl(updateProfile);
+
+    // Make API request
+    try {
+      Response response = await _apiInstance.client.put(url,
+          body: jsonEncode({
+            "name": name,
+            "address": address,
+            "age": age,
+            "identification": identification,
+            "password": password,
+          }));
+      switch (response.statusCode) {
+        case 200:
+          final Map responseConverted = jsonDecode(response.body);
+
+          return {
+            "success": true,
+          };
+
+        default:
+          break;
+      }
+    } catch (error) {
+      print(error);
+    }
+
+    return {
+      "success": false,
+    };
   }
 }

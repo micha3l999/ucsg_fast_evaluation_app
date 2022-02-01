@@ -1,33 +1,33 @@
 import 'package:flutter/material.dart';
 
 enum StructureType {
-  metalCovers,
-  corrugatedFiberCementRoofing,
-  asphaltTileRoofs,
-  selfSupportingRoofs,
-  polycarbonateCovers,
+  Cubiertas_de_metal,
+  Techos_de_fibrocemento_corrugado,
+  Techos_de_tejas_de_asfalto,
+  Techos_autoportantes,
+  Cubiertas_de_policarbonato,
 }
 
 enum ColumnStructures {
-  concrete,
-  steel,
-  wood,
+  Concreto,
+  Acero,
+  Madera,
 }
 
 enum WallStructure {
-  concrete,
-  wood,
-  brick,
-  stone,
+  Concreto,
+  Madera,
+  Ladrillo,
+  Piedra,
 }
 
-enum Pre { yes, no }
+enum Pre { Si, No }
 
 class FormTwoProvider extends ChangeNotifier {
-  StructureType? radioValueRoof = StructureType.metalCovers;
-  ColumnStructures? radioValueColumn = ColumnStructures.concrete;
-  WallStructure? radioValueWall = WallStructure.concrete;
-  Pre? radioValuePre = Pre.yes;
+  StructureType? radioValueRoof = StructureType.Cubiertas_de_metal;
+  ColumnStructures? radioValueColumn = ColumnStructures.Concreto;
+  WallStructure? radioValueWall = WallStructure.Concreto;
+  Pre? radioValuePre = Pre.Si;
 
   changeRadioValueRoof(StructureType? value) {
     radioValueRoof = value;
