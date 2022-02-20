@@ -28,7 +28,7 @@ class _QualifyBuildingState extends State<QualifyBuilding> {
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
           appBar: AppBar(
-            title: Text("Evaluación de seguridad"),
+            title: Text("Evaluación de seguridad rápida"),
             backgroundColor: Color(primaryColor),
           ),
           body: Container(
