@@ -143,21 +143,21 @@ class _BuildingInformationState extends State<BuildingInformation> {
       listTiles.add(buildListTileBuilding(title, value))
     }*/
     listTiles.add(buildListTileBuilding(
-        "Lugar de inspección", buildingInfo["inspectionPlace"]));
+        "Ubicacion del Edificio", buildingInfo["inspectionPlace"]));
 
     listTiles.add(buildListTileBuilding("Identificación del inspector",
         buildingInfo["inspectorIdentification"]));
 
     listTiles.add(buildListTileBuilding(
-        "Estructura del techo", buildingInfo["roofStructure"]));
+        "Numero de niveles del edificio", buildingInfo["roofStructure"]));
 
     listTiles.add(buildListTileBuilding(
-        "Escaleras y salidas", buildingInfo["stairsAndExits"]));
+        "Edad de la estructura", buildingInfo["stairsAndExits"]));
 
     listTiles
         .add(buildListTileBuilding("Propietario", buildingInfo["userName"]));
 
-    listTiles.add(buildListTileBuilding("Tiene Gas", buildingInfo["hasGas"]));
+    listTiles.add(buildListTileBuilding("Tipo de Construccion", buildingInfo["hasGas"]));
 
     listTiles.add(buildListTileBuilding(
         "Comentarios de emergencia", buildingInfo["emergencyComments"]));

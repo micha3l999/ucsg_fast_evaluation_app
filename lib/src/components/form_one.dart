@@ -28,7 +28,7 @@ class _FormOneState extends State<FormOne> {
                     Flexible(
                       flex: 4,
                       child: Text(
-                        "Indique la edificación que desea registrar",
+                        "Ingrese los datos de la Edificacion",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: extraBigFont,
@@ -43,31 +43,31 @@ class _FormOneState extends State<FormOne> {
                   height: 8,
                 ),
                 ListTile(
-                  title: const Text("Casa"),
-                  leading: Radio<StructureType>(
+                  title: const Text("Ubicacion Del Edificio"),
+                  leading: Radio<StructureTypeOne>(
                     groupValue: provider.radioValue,
-                    value: StructureType.Casa,
-                    onChanged: (StructureType? value) {
+                    value: StructureTypeOne.Ubicacion_Del_Edificio,
+                    onChanged: (StructureTypeOne? value) {
                       provider.radioValueSetter = value;
                     },
                   ),
                 ),
                 ListTile(
-                  title: const Text("Edificio"),
-                  leading: Radio<StructureType>(
+                  title: const Text("Descripcion Del Edifico"),
+                  leading: Radio<StructureTypeOne>(
                     groupValue: provider.radioValue,
-                    value: StructureType.Edificio,
-                    onChanged: (StructureType? value) {
+                    value: StructureTypeOne.Descripcion_Del_Edifico,
+                    onChanged: (StructureTypeOne? value) {
                       provider.radioValueSetter = value;
                     },
                   ),
                 ),
                 ListTile(
-                  title: const Text("Departamento"),
-                  leading: Radio<StructureType>(
+                  title: const Text("Caracteristicas Estructurales"),
+                  leading: Radio<StructureTypeOne>(
                     groupValue: provider.radioValue,
-                    value: StructureType.Departamento,
-                    onChanged: (StructureType? value) {
+                    value: StructureTypeOne.Caracteristicas_Estructurales,
+                    onChanged: (StructureTypeOne? value) {
                       provider.radioValueSetter = value;
                     },
                   ),

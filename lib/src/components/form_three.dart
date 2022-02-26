@@ -27,7 +27,7 @@ class _FormThreeState extends State<FormThree> {
                   children: const [
                     Spacer(),
                     Text(
-                      "Profundidad de la construcción",
+                        "Descripcion de la construcción",
                       style: TextStyle(
                         fontSize: extraBigFont,
                         color: Color(primaryColor),
@@ -40,7 +40,7 @@ class _FormThreeState extends State<FormThree> {
                   height: 8,
                 ),
                 const Text(
-                  " 6. Indique que estan hechos los revestimientos",
+                  " 1. Numero de Niveles Altos o Numero de niveles Bajos // Indique La Altura de entrepisos de ser posible",
                   style: TextStyle(
                     fontSize: bigFont,
                   ),
@@ -55,7 +55,7 @@ class _FormThreeState extends State<FormThree> {
                   height: 16,
                 ),
                 const Text(
-                  " 7. Indique techos o artefactos de iluminación",
+                  " 2. Indique el area de planta baja",
                   style: TextStyle(
                     fontSize: bigFont,
                   ),
@@ -70,7 +70,7 @@ class _FormThreeState extends State<FormThree> {
                   height: 8,
                 ),
                 const Text(
-                  " 8. Indique cuantas escaleras y salidas",
+                  " 3. Indique el area de planta Alta",
                   style: TextStyle(
                     fontSize: bigFont,
                   ),
@@ -80,6 +80,21 @@ class _FormThreeState extends State<FormThree> {
                 ),
                 TextField(
                   controller: provider.controllerDepartures,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                const Text(
+                  " 4. Edad de la estructura ",
+                  style: TextStyle(
+                    fontSize: bigFont,
+                  ),
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                TextField(
+                  controller: provider.controller1,
                 ),
                 const SizedBox(
                   height: 8,
@@ -97,7 +112,7 @@ class _FormThreeState extends State<FormThree> {
   buildGasSelection(FormThreeProvider provider) {
     return [
       const Text(
-        " 9. ¿Tiene gas en la edificación?",
+        "5. Ocupacion primaria de la estructura",
         style: TextStyle(
           fontSize: bigFont,
         ),
@@ -106,22 +121,92 @@ class _FormThreeState extends State<FormThree> {
         height: 8,
       ),
       ListTile(
-        title: const Text("Sí"),
-        leading: Radio<Gas>(
-          groupValue: provider.radioValueGas,
-          value: Gas.Si,
-          onChanged: (Gas? value) {
-            provider.changeRadioValueGas(value);
+        title: const Text("Vivienda"),
+        leading: Radio<StructureType>(
+          groupValue: provider.radioValueRoof,
+          value: StructureType.Vivienda,
+          onChanged: (StructureType? value) {
+            provider.changeRadioValueRoof(value);
           },
         ),
       ),
       ListTile(
-        title: const Text("No"),
-        leading: Radio<Gas>(
-          groupValue: provider.radioValueGas,
-          value: Gas.No,
-          onChanged: (Gas? value) {
-            provider.changeRadioValueGas(value);
+        title: const Text("Asamblea Publica"),
+        leading: Radio<StructureType>(
+          groupValue: provider.radioValueRoof,
+          value: StructureType. Asamblea_Publica,
+          onChanged: (StructureType? value) {
+            provider.changeRadioValueRoof(value);
+          },
+        ),
+      ),
+      ListTile(
+        title: const Text("Servicios De Emergencia"),
+        leading: Radio<StructureType>(
+          groupValue: provider.radioValueRoof,
+          value: StructureType.Servicios_De_Emergencia,
+          onChanged: (StructureType? value) {
+            provider.changeRadioValueRoof(value);
+          },
+        ),
+      ),
+      ListTile(
+        title: const Text("Comercial"),
+        leading: Radio<StructureType>(
+          groupValue: provider.radioValueRoof,
+          value: StructureType.Comercial,
+          onChanged: (StructureType? value) {
+            provider.changeRadioValueRoof(value);
+          },
+        ),
+      ),
+      ListTile(
+        title: const Text("Oficinas"),
+        leading: Radio<StructureType>(
+          groupValue: provider.radioValueRoof,
+          value: StructureType.Oficinas,
+          onChanged: (StructureType? value) {
+            provider.changeRadioValueRoof(value);
+          },
+        ),
+      ),
+      ListTile(
+        title: const Text("Industrial"),
+        leading: Radio<StructureType>(
+          groupValue: provider.radioValueRoof,
+          value: StructureType.Industrial,
+          onChanged: (StructureType? value) {
+            provider.changeRadioValueRoof(value);
+          },
+        ),
+      ),
+      ListTile(
+        title: const Text("Gobierno"),
+        leading: Radio<StructureType>(
+          groupValue: provider.radioValueRoof,
+          value: StructureType.Gobierno,
+          onChanged: (StructureType? value) {
+            provider.changeRadioValueRoof(value);
+          },
+        ),
+      ),
+      ListTile(
+        title: const Text("Historico"),
+        leading: Radio<StructureType>(
+          groupValue: provider.radioValueRoof,
+          value: StructureType.Historico,
+          onChanged: (StructureType? value) {
+            provider.changeRadioValueRoof(value);
+          },
+        ),
+      ),
+      ListTile(
+        title: const Text("Educativo"),
+        leading: Radio<StructureType>(
+          groupValue: provider.radioValueRoof,
+          value: StructureType.Historico,
+          onChanged: (StructureType? value) {
+            provider.changeRadioValueRoof(value);
           },
         ),
       ),
@@ -131,7 +216,7 @@ class _FormThreeState extends State<FormThree> {
   buildElectricitySelection(FormThreeProvider provider) {
     return [
       const Text(
-        " 10. ¿Tiene electricidad en la edificación?",
+        " 6. Tipo de construccion",
         style: TextStyle(
           fontSize: bigFont,
         ),
@@ -140,20 +225,20 @@ class _FormThreeState extends State<FormThree> {
         height: 8,
       ),
       ListTile(
-        title: const Text("Sí"),
+        title: const Text("Informal"),
         leading: Radio<Electricity>(
           groupValue: provider.radioValueElectricity,
-          value: Electricity.Si,
+          value: Electricity.informal,
           onChanged: (Electricity? value) {
             provider.changeRadioValueElectricity(value);
           },
         ),
       ),
       ListTile(
-        title: const Text("No"),
+        title: const Text("Tecnica"),
         leading: Radio<Electricity>(
           groupValue: provider.radioValueElectricity,
-          value: Electricity.No,
+          value: Electricity.tecnica,
           onChanged: (Electricity? value) {
             provider.changeRadioValueElectricity(value);
           },

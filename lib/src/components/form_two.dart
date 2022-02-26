@@ -27,7 +27,7 @@ class _FormTwoState extends State<FormTwo> {
                   children: const [
                     Spacer(),
                     Text(
-                      "Estructura de la vivienda",
+                      "Datos de Ubicacion del edificio",
                       style: TextStyle(
                         fontSize: extraBigFont,
                         color: Color(primaryColor),
@@ -46,6 +46,9 @@ class _FormTwoState extends State<FormTwo> {
                 ...buildColumnStructure(provider),
                 ...buildWallStructureForm(provider),
                 ...buildPreConnection(provider),
+                ...buildPreConnection2(provider),
+                ...buildPreConnection3(provider),
+                ...buildPreConnection4(provider),
               ],
             ),
           ),
@@ -57,7 +60,7 @@ class _FormTwoState extends State<FormTwo> {
   buildRoofStructure(FormTwoProvider provider) {
     return [
       const Text(
-        " 1. Indique el material del techo",
+        " 1. Fecha de Inspeccion",
         style: TextStyle(
           fontSize: bigFont,
         ),
@@ -65,7 +68,11 @@ class _FormTwoState extends State<FormTwo> {
       const SizedBox(
         height: 8,
       ),
-      ListTile(
+      TextField(
+        controller: provider.controller1,
+      ),
+
+      /*ListTile(
         title: const Text("Cubiertas metálicas"),
         leading: Radio<StructureType>(
           groupValue: provider.radioValueRoof,
@@ -114,14 +121,14 @@ class _FormTwoState extends State<FormTwo> {
             provider.changeRadioValueRoof(value);
           },
         ),
-      ),
+      ),*/
     ];
   }
 
   buildColumnStructure(FormTwoProvider provider) {
     return [
       const Text(
-        " 2. Indique el material usado para las columnas",
+        " 2. Calle Principal",
         style: TextStyle(
           fontSize: bigFont,
         ),
@@ -129,7 +136,7 @@ class _FormTwoState extends State<FormTwo> {
       const SizedBox(
         height: 8,
       ),
-      ListTile(
+     /* ListTile(
         title: const Text("Concreto"),
         leading: Radio<ColumnStructures>(
           groupValue: provider.radioValueColumn,
@@ -158,6 +165,9 @@ class _FormTwoState extends State<FormTwo> {
             provider.changeRadioValueColumn(value);
           },
         ),
+      ),*/
+      TextField(
+        controller: provider.controller2,
       ),
     ];
   }
@@ -165,7 +175,7 @@ class _FormTwoState extends State<FormTwo> {
   buildWallStructureForm(FormTwoProvider provider) {
     return [
       const Text(
-        " 3. De que material estan construidas las paredes",
+        " 3. Numeracion e interseccion",
         style: TextStyle(
           fontSize: bigFont,
         ),
@@ -173,7 +183,7 @@ class _FormTwoState extends State<FormTwo> {
       const SizedBox(
         height: 8,
       ),
-      ListTile(
+     /* ListTile(
         title: const Text("Concreto"),
         leading: Radio<WallStructure>(
           groupValue: provider.radioValueWall,
@@ -212,6 +222,9 @@ class _FormTwoState extends State<FormTwo> {
             provider.changeRadioValueWall(value);
           },
         ),
+      ),*/
+      TextField(
+        controller: provider.controller3,
       ),
     ];
   }
@@ -219,7 +232,7 @@ class _FormTwoState extends State<FormTwo> {
   buildPreConnection(FormTwoProvider provider) {
     return [
       const Text(
-        " 4. Existen conexiones prefabricadas?",
+        " 4. Sector/Barrio/Ciudadela",
         style: TextStyle(
           fontSize: bigFont,
         ),
@@ -227,7 +240,11 @@ class _FormTwoState extends State<FormTwo> {
       const SizedBox(
         height: 8,
       ),
-      ListTile(
+      TextField(
+        controller: provider.controller4,
+      ),
+
+     /* ListTile(
         title: const Text("Sí"),
         leading: Radio<Pre>(
           groupValue: provider.radioValuePre,
@@ -246,7 +263,62 @@ class _FormTwoState extends State<FormTwo> {
             provider.changeRadioValuePre(value);
           },
         ),
-      ),
+     ), */
     ];
   }
+
+  buildPreConnection2(FormTwoProvider provider) {
+    return [
+      const Text(
+        " 5. Ciudad/Canton/Provincia",
+        style: TextStyle(
+          fontSize: bigFont,
+        ),
+      ),
+      const SizedBox(
+      height: 8,
+      ),
+      TextField(
+      controller: provider.controller5,
+      ),
+
+    ];
+  }
+
+  buildPreConnection3(FormTwoProvider provider) {
+    return [
+      const Text(
+        " 6. Codigo catastral",
+        style: TextStyle(
+          fontSize: bigFont,
+        ),
+      ),
+      const SizedBox(
+        height: 8,
+      ),
+      TextField(
+        controller: provider.controller6,
+      ),
+
+    ];
+  }
+
+  buildPreConnection4(FormTwoProvider provider) {
+    return [
+      const Text(
+        "Otros Detalles",
+        style: TextStyle(
+          fontSize: bigFont,
+        ),
+      ),
+      const SizedBox(
+        height: 8,
+      ),
+      TextField(
+        controller: provider.controller7,
+      ),
+
+    ];
+  }
+
 }

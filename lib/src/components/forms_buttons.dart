@@ -25,10 +25,10 @@ class FormButtons extends StatefulWidget {
   final PageController pageController;
 
   @override
-  State<FormButtons> createState() => _FormButtonsState();
+  State<FormButtons> createState() => FormButtonsState();
 }
 
-class _FormButtonsState extends State<FormButtons> with GlobalFunctions {
+class FormButtonsState extends State<FormButtons> with GlobalFunctions {
   late FormOneProvider formOneProvider;
 
   late FormTwoProvider formTwoProvider;
@@ -76,9 +76,28 @@ class _FormButtonsState extends State<FormButtons> with GlobalFunctions {
           ),
         const Spacer(),
         PrimaryButton(
-            buttonText: widget.currentPage >= 3 ? "Enviar" : "Siguiente",
+            buttonText: widget.currentPage >= 1 ? "Enviar" : "Siguiente",
             onTap: () async {
-              await widget.pageController.nextPage(
+              if (widget.currentPage == 0) {
+                if (formOneProvider.radioValue == StructureTypeOne.Ubicacion_Del_Edificio) {
+                  widget.pageController.animateToPage(1, duration: const Duration(milliseconds: 1000),
+                      curve: Curves.easeInOut);
+                } else if (formOneProvider.radioValue == StructureTypeOne.Descripcion_Del_Edifico) {
+                  widget.pageController.animateToPage(2, duration: const Duration(milliseconds: 1000),
+                      curve: Curves.easeInOut);
+                } else {
+                  widget.pageController.animateToPage(3, duration: const Duration(milliseconds: 1000),
+                      curve: Curves.easeInOut);
+                }
+                widget.updateCurrentValue(widget.pageController.page!);
+
+              } else {
+                widget.pageController.animateToPage(0, duration: const Duration(milliseconds: 1000),
+                    curve: Curves.easeInOut);
+                widget.updateCurrentValue(widget.pageController.page!);
+
+              }
+              /*await widget.pageController.nextPage(
                   duration: const Duration(milliseconds: 1000),
                   curve: Curves.easeInOut);
               if (widget.currentPage != 3) {
@@ -87,7 +106,7 @@ class _FormButtonsState extends State<FormButtons> with GlobalFunctions {
                 widget.updateLoading();
                 sendData();
                 widget.updateLoading();
-              }
+              }*/
             }),
       ],
     );

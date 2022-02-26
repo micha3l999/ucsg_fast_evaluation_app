@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:seguridad_evaluacion/src/pages/evaluation_form.dart';
 import 'package:seguridad_evaluacion/src/pages/get_all_users_data.dart';
+import 'package:seguridad_evaluacion/src/pages/get_all_users_data2.dart';
 import 'package:seguridad_evaluacion/src/pages/profile.dart';
 import 'package:seguridad_evaluacion/src/utils/colors.dart';
 
@@ -77,11 +78,25 @@ class _HomeState extends State<Home> {
               InkWell(
                 onTap: () {
                   Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (_) => AllUserData2()));
+                },
+                child: ListTile(
+                  leading: Text(
+                    "Consultar datos propios",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  trailing: Icon(Icons.navigate_next),
+                ),
+              ),
+              const Divider(),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context)
                       .push(MaterialPageRoute(builder: (_) => AllUserData()));
                 },
                 child: ListTile(
                   leading: Text(
-                    "Consultar datos",
+                    "Consultar datos globales",
                     style: TextStyle(fontSize: 16),
                   ),
                   trailing: Icon(Icons.navigate_next),

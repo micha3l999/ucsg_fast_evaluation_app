@@ -24,6 +24,13 @@ enum WallStructure {
 enum Pre { Si, No }
 
 class FormTwoProvider extends ChangeNotifier {
+  final TextEditingController controller1 = TextEditingController();
+  final TextEditingController controller2 = TextEditingController();
+  final TextEditingController controller3 = TextEditingController();
+  final TextEditingController controller4 = TextEditingController();
+  final TextEditingController controller5 = TextEditingController();
+  final TextEditingController controller6 = TextEditingController();
+  final TextEditingController controller7 = TextEditingController();
   StructureType? radioValueRoof = StructureType.Cubiertas_de_metal;
   ColumnStructures? radioValueColumn = ColumnStructures.Concreto;
   WallStructure? radioValueWall = WallStructure.Concreto;

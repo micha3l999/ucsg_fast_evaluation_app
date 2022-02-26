@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-enum StructureType { Casa, Edificio, Departamento }
+enum StructureTypeOne { Ubicacion_Del_Edificio, Descripcion_Del_Edifico, Caracteristicas_Estructurales }
 
 class FormOneProvider extends ChangeNotifier {
-  StructureType? radioValue = StructureType.Casa;
+  StructureTypeOne? radioValue = StructureTypeOne.Ubicacion_Del_Edificio;
 
-  set radioValueSetter(StructureType? value) {
+  set radioValueSetter(StructureTypeOne? value) {
     radioValue = value;
     notifyListeners();
   }

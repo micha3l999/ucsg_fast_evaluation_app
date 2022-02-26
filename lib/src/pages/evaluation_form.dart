@@ -25,74 +25,82 @@ class _EvaluationFormState extends State<EvaluationForm> {
   final PageController _pageController = PageController();
   final ValueNotifier<double> _currentPage = ValueNotifier(0);
   ValueNotifier<bool> _isLoading = ValueNotifier(false);
+  final _buttons = GlobalKey<FormButtonsState>();
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<FormOneProvider>(
-          create: (_) => FormOneProvider(),
-        ),
-        ChangeNotifierProvider<FormTwoProvider>(
-          create: (_) => FormTwoProvider(),
-        ),
-        ChangeNotifierProvider<FormThreeProvider>(
-          create: (_) => FormThreeProvider(),
-        ),
-        ChangeNotifierProvider<FormFourProvider>(
-          create: (_) => FormFourProvider(),
-        ),
-      ],
-      child: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text("Evaluación de seguridad"),
-            backgroundColor: const Color(primaryColor),
+    return WillPopScope(
+      onWillPop: () async {
+        _buttons.currentState!.sendData();
+        return true;
+      },
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider<FormOneProvider>(
+            create: (_) => FormOneProvider(),
           ),
-          backgroundColor: const Color(primaryColor),
-          body: SafeArea(
-            child: Stack(
-              children: [
-                Container(
-                  color: Colors.white,
-                  child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(normalPadding),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          buildPageView(),
-                          ValueListenableBuilder(
-                              valueListenable: _currentPage,
-                              builder: (_, value, child) {
-                                return FormButtons(
-                                  initializeController: initializeController,
-                                  currentPage: _currentPage.value,
-                                  updateCurrentValue: updateCurrentPage,
-                                  pageController: _pageController,
-                                  updateLoading: changeIsLoading,
-                                );
-                              }),
-                        ],
+          ChangeNotifierProvider<FormTwoProvider>(
+            create: (_) => FormTwoProvider(),
+          ),
+          ChangeNotifierProvider<FormThreeProvider>(
+            create: (_) => FormThreeProvider(),
+          ),
+          ChangeNotifierProvider<FormFourProvider>(
+            create: (_) => FormFourProvider(),
+          ),
+        ],
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Scaffold(
+            appBar: AppBar(
+              title: const Text("Evaluación de seguridad"),
+              backgroundColor: const Color(primaryColor),
+            ),
+            backgroundColor: const Color(primaryColor),
+            body: SafeArea(
+              child: Stack(
+                children: [
+                  Container(
+                    color: Colors.white,
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(normalPadding),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            buildPageView(),
+                            ValueListenableBuilder(
+                                valueListenable: _currentPage,
+                                builder: (_, value, child) {
+                                  return FormButtons(
+                                    key: _buttons,
+                                    initializeController: initializeController,
+                                    currentPage: _currentPage.value,
+                                    updateCurrentValue: updateCurrentPage,
+                                    pageController: _pageController,
+                                    updateLoading: changeIsLoading,
+                                  );
+                                }),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-                ValueListenableBuilder(
-                    valueListenable: _isLoading,
-                    builder: (_, bool value, child) {
-                      if (value) {
-                        return Container(
-                          color: const Color.fromRGBO(255, 255, 255, 0.7),
-                          child: const Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        );
-                      }
-                      return SizedBox();
-                    }),
-              ],
+                  ValueListenableBuilder(
+                      valueListenable: _isLoading,
+                      builder: (_, bool value, child) {
+                        if (value) {
+                          return Container(
+                            color: const Color.fromRGBO(255, 255, 255, 0.7),
+                            child: const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          );
+                        }
+                        return SizedBox();
+                      }),
+                ],
+              ),
             ),
           ),
         ),
@@ -134,4 +142,5 @@ class _EvaluationFormState extends State<EvaluationForm> {
   void changeIsLoading() {
     _isLoading.value = !_isLoading.value;
   }
+
 }
