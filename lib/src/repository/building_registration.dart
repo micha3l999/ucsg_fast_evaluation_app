@@ -139,4 +139,96 @@ abstract class BuildingRegistrationRepository {
       "conflict": "Hubo un error",
     };
   }
+
+  static Future<Map> sendRegistrationInfoNew(
+    String inspectionDate,
+    String mainStreet,
+    String numberIntersection,
+    String district,
+    String city,
+    String cadastralCode,
+    String otherDetails,
+    String highLowLevels,
+    String lowLevelArea,
+    String highLevelArea,
+    String structureAge,
+    String firstStructureOccupation,
+    String constructionType,
+    String columnsDistance,
+    String columnsNumber,
+    String wallsNumber,
+    String isIrregularities,
+    String observedDamage,
+    String buildingQualification,
+    String inspectionPlace,
+    String installationAddress,
+    String restrictions,
+    String inspectorObservation,
+    String emergencyComments,
+    String inspectorIdentification,
+  ) async {
+    Uri url = _apiInstance.getUrl(registrationUrl);
+
+    String? user =
+        await SharedPreferencesRepo.getPrefer(SharedPreferencesKeys.user);
+    String identification = "";
+    String userName = "";
+    if (user != null) {
+      identification = jsonDecode(user)["id"];
+      userName = jsonDecode(user)["name"];
+    }
+
+    try {
+      Response response = await _apiInstance.client.post(url,
+          body: jsonEncode({
+            "inspectionDate": inspectionDate,
+            "mainStreet": mainStreet,
+            "numberIntersection": numberIntersection,
+            "district": district,
+            "city": city,
+            "cadastralCode": cadastralCode,
+            "otherDetails": otherDetails,
+            "highLowLevels": highLowLevels,
+            "lowLevelArea": lowLevelArea,
+            "highLevelArea": highLevelArea,
+            "structureAge": structureAge,
+            "firstStructureOccupation": firstStructureOccupation,
+            "constructionType": constructionType,
+            "columnsDistance": columnsDistance,
+            "columnsNumber": columnsNumber,
+            "wallsNumber": wallsNumber,
+            "isIrregularities": isIrregularities,
+            "observedDamage": observedDamage,
+            "buildingQualification": buildingQualification,
+            "inspectionPlace": inspectionPlace,
+            "installationAddress": installationAddress,
+            "restrictions": restrictions,
+            "inspectorObservation": inspectorObservation,
+            "emergencyComments": emergencyComments,
+            "inspectorIdentification": inspectorIdentification,
+            "userId": identification,
+            "userName": userName,
+          }));
+      switch (response.statusCode) {
+        case 200:
+          return {
+            "success": true,
+            "conflict": "NONE",
+          };
+        case 400:
+          return {
+            "success": false,
+            "conflict": "INSPECTOR_IDENTIFICATION",
+          };
+        default:
+          break;
+      }
+    } catch (error) {
+      print(error);
+    }
+    return {
+      "success": false,
+      "conflict": "ERROR",
+    };
+  }
 }

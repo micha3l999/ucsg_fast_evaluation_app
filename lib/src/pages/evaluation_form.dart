@@ -29,78 +29,82 @@ class _EvaluationFormState extends State<EvaluationForm> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        _buttons.currentState!.sendData();
-        return true;
-      },
-      child: MultiProvider(
-        providers: [
-          ChangeNotifierProvider<FormOneProvider>(
-            create: (_) => FormOneProvider(),
-          ),
-          ChangeNotifierProvider<FormTwoProvider>(
-            create: (_) => FormTwoProvider(),
-          ),
-          ChangeNotifierProvider<FormThreeProvider>(
-            create: (_) => FormThreeProvider(),
-          ),
-          ChangeNotifierProvider<FormFourProvider>(
-            create: (_) => FormFourProvider(),
-          ),
-        ],
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Scaffold(
-            appBar: AppBar(
-              title: const Text("Evaluación de seguridad"),
-              backgroundColor: const Color(primaryColor),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<FormOneProvider>(
+          create: (_) => FormOneProvider(),
+        ),
+        ChangeNotifierProvider<FormTwoProvider>(
+          create: (_) => FormTwoProvider(),
+        ),
+        ChangeNotifierProvider<FormThreeProvider>(
+          create: (_) => FormThreeProvider(),
+        ),
+        ChangeNotifierProvider<FormFourProvider>(
+          create: (_) => FormFourProvider(),
+        ),
+      ],
+      child: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: Scaffold(
+          appBar: AppBar(
+            title: Row(
+              children: [
+                const Text("Evaluación de seguridad"),
+                const Spacer(),
+                IconButton(
+                    onPressed: () async {
+                      await _buttons.currentState!.sendData();
+                    },
+                    icon: Icon(Icons.save))
+              ],
             ),
             backgroundColor: const Color(primaryColor),
-            body: SafeArea(
-              child: Stack(
-                children: [
-                  Container(
-                    color: Colors.white,
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(normalPadding),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            buildPageView(),
-                            ValueListenableBuilder(
-                                valueListenable: _currentPage,
-                                builder: (_, value, child) {
-                                  return FormButtons(
-                                    key: _buttons,
-                                    initializeController: initializeController,
-                                    currentPage: _currentPage.value,
-                                    updateCurrentValue: updateCurrentPage,
-                                    pageController: _pageController,
-                                    updateLoading: changeIsLoading,
-                                  );
-                                }),
-                          ],
-                        ),
+          ),
+          backgroundColor: const Color(primaryColor),
+          body: SafeArea(
+            child: Stack(
+              children: [
+                Container(
+                  color: Colors.white,
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(normalPadding),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          buildPageView(),
+                          ValueListenableBuilder(
+                              valueListenable: _currentPage,
+                              builder: (_, value, child) {
+                                return FormButtons(
+                                  key: _buttons,
+                                  initializeController: initializeController,
+                                  currentPage: _currentPage.value,
+                                  updateCurrentValue: updateCurrentPage,
+                                  pageController: _pageController,
+                                  updateLoading: changeIsLoading,
+                                );
+                              }),
+                        ],
                       ),
                     ),
                   ),
-                  ValueListenableBuilder(
-                      valueListenable: _isLoading,
-                      builder: (_, bool value, child) {
-                        if (value) {
-                          return Container(
-                            color: const Color.fromRGBO(255, 255, 255, 0.7),
-                            child: const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                          );
-                        }
-                        return SizedBox();
-                      }),
-                ],
-              ),
+                ),
+                ValueListenableBuilder(
+                    valueListenable: _isLoading,
+                    builder: (_, bool value, child) {
+                      if (value) {
+                        return Container(
+                          color: const Color.fromRGBO(255, 255, 255, 0.7),
+                          child: const Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      }
+                      return SizedBox();
+                    }),
+              ],
             ),
           ),
         ),
@@ -142,5 +146,4 @@ class _EvaluationFormState extends State<EvaluationForm> {
   void changeIsLoading() {
     _isLoading.value = !_isLoading.value;
   }
-
 }

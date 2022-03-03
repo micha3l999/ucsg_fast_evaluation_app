@@ -18,23 +18,29 @@ class QualifyBuilding extends StatefulWidget {
 class _QualifyBuildingState extends State<QualifyBuilding> {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider<FormFiveProvider>(
-          create: (_) => FormFiveProvider(),
-        ),
-      ],
-      child: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text("Evaluación de seguridad rápida"),
-            backgroundColor: Color(primaryColor),
+    return WillPopScope(
+      onWillPop: () async {
+        FocusManager.instance.primaryFocus?.unfocus();
+        return true;
+      },
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider<FormFiveProvider>(
+            create: (_) => FormFiveProvider(),
           ),
-          body: Container(
-            child: FormFive(
-              buildingId: widget.buildingId,
-              userId: widget.userId,
+        ],
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text("Evaluación de seguridad rápida"),
+              backgroundColor: Color(primaryColor),
+            ),
+            body: Container(
+              child: FormFive(
+                buildingId: widget.buildingId,
+                userId: widget.userId,
+              ),
             ),
           ),
         ),

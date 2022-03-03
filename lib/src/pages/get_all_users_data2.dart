@@ -42,7 +42,8 @@ class _AllUserDataState extends State<AllUserData2> {
             ),
             Expanded(
               child: FutureBuilder(
-                future: AllUserDataRepository.getAllUserData(),
+                future:
+                    AllUserDataRepository.getAllUserData(ownBuildings: true),
                 builder: (_, AsyncSnapshot<Map> snapshot) {
                   if (snapshot.hasData) {
                     if (snapshot.data!["success"]) {
@@ -89,6 +90,7 @@ class _AllUserDataState extends State<AllUserData2> {
             builder: (_) => BuildingInformation(
                   buildingId: building["id"],
                   userId: building["userId"],
+                  ownRecords: true,
                 )));
         setState(() {});
       },

@@ -89,6 +89,7 @@ class _AllUserDataState extends State<AllUserData> {
             builder: (_) => BuildingInformation(
                   buildingId: building["id"],
                   userId: building["userId"],
+                  ownRecords: false,
                 )));
         setState(() {});
       },

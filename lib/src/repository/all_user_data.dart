@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' show Response;
+import 'package:seguridad_evaluacion/src/dependencies/shared_preferences_keys.dart';
+import 'package:seguridad_evaluacion/src/dependencies/shared_preferences_repo.dart';
 import 'package:seguridad_evaluacion/src/network/api_instance.dart';
 
 abstract class AllUserDataRepository {
@@ -13,8 +15,19 @@ abstract class AllUserDataRepository {
 
   static final ApiInstance _apiInstance = ApiInstance.getInstance()!;
 
-  static Future<Map> getAllUserData() async {
-    Uri url = _apiInstance.getUrl(urlAllUserData);
+  static Future<Map> getAllUserData({bool ownBuildings = false}) async {
+    Uri url;
+    if (!ownBuildings) {
+      url = _apiInstance.getUrl(urlAllUserData);
+    } else {
+      String? user =
+          await SharedPreferencesRepo.getPrefer(SharedPreferencesKeys.user);
+      String identification = "";
+      if (user != null) {
+        identification = jsonDecode(user)["id"];
+      }
+      url = _apiInstance.getUrl(urlAllUserData + "/" + identification);
+    }
 
     // Make Api Request
     try {
