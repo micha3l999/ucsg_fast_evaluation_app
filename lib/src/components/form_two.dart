@@ -136,7 +136,7 @@ class _FormTwoState extends State<FormTwo> {
       const SizedBox(
         height: 8,
       ),
-     /* ListTile(
+      /* ListTile(
         title: const Text("Concreto"),
         leading: Radio<ColumnStructures>(
           groupValue: provider.radioValueColumn,
@@ -183,7 +183,7 @@ class _FormTwoState extends State<FormTwo> {
       const SizedBox(
         height: 8,
       ),
-     /* ListTile(
+      /* ListTile(
         title: const Text("Concreto"),
         leading: Radio<WallStructure>(
           groupValue: provider.radioValueWall,
@@ -244,7 +244,7 @@ class _FormTwoState extends State<FormTwo> {
         controller: provider.controller4,
       ),
 
-     /* ListTile(
+      /* ListTile(
         title: const Text("Sí"),
         leading: Radio<Pre>(
           groupValue: provider.radioValuePre,
@@ -276,12 +276,11 @@ class _FormTwoState extends State<FormTwo> {
         ),
       ),
       const SizedBox(
-      height: 8,
+        height: 8,
       ),
       TextField(
-      controller: provider.controller5,
+        controller: provider.controller5,
       ),
-
     ];
   }
 
@@ -299,7 +298,6 @@ class _FormTwoState extends State<FormTwo> {
       TextField(
         controller: provider.controller6,
       ),
-
     ];
   }
 
@@ -317,8 +315,6 @@ class _FormTwoState extends State<FormTwo> {
       TextField(
         controller: provider.controller7,
       ),
-
     ];
   }
-
 }

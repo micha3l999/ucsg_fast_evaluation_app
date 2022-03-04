@@ -108,6 +108,12 @@ class FormButtonsState extends State<FormButtons> with GlobalFunctions {
 
   Future sendData() async {
     // Send request and show loading in the form registration
+    if (formTwoProvider.controller6.text.isEmpty) {
+      await informationDialog(context,
+          title: "Ingrese un código catastral para poder guardar el registro");
+      return;
+    }
+
     this.widget.updateLoading();
     /*Map response = await BuildingRegistrationRepository.sendRegistrationInfo(
         radioToString(formOneProvider.radioValue),

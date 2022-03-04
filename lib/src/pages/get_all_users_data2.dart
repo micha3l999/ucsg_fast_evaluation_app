@@ -128,12 +128,12 @@ class _AllUserDataState extends State<AllUserData2> {
               Row(
                 children: [
                   Text(
-                    "Identificación: ",
+                    "Código catastral: ",
                     style: TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
                   ),
                   Flexible(
                     child: Text(
-                      building["userId"],
+                      building["cadastralCode"],
                       style: TextStyle(
                         fontSize: 14,
                         overflow: TextOverflow.ellipsis,

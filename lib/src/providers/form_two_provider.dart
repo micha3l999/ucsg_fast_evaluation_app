@@ -22,9 +22,12 @@ enum WallStructure {
 }
 
 enum Pre { Si, No }
+DateTime time = DateTime.now();
 
 class FormTwoProvider extends ChangeNotifier {
-  final TextEditingController controller1 = TextEditingController();
+  final TextEditingController controller1 = TextEditingController(
+      text:
+          "${time.year}-${time.month.toString().padLeft(2, '0')}-${time.day.toString().padLeft(2, '0')}");
   final TextEditingController controller2 = TextEditingController();
   final TextEditingController controller3 = TextEditingController();
   final TextEditingController controller4 = TextEditingController();
